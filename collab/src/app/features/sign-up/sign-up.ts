@@ -63,7 +63,7 @@ export class SignUp {
             password: ''
           });
           alert('Registration successful! Redirecting to login...');
-          this.router.navigate(['/']);
+          this.router.navigate(['/login']);
         },
         error: (error) => {
           console.error('Error registering user:', error);
