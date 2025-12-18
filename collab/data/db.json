@@ -1,0 +1,55 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "surname": "User",
+      "age": 30,
+      "email": "admin@example.com",
+      "password": "admin123"
+    },
+    {
+      "id": 2,
+      "name": "John",
+      "surname": "Doe",
+      "age": 25,
+      "email": "john@example.com",
+      "password": "user123"
+    },
+    {
+      "id": 3,
+      "name": "Sarah",
+      "surname": "Smith",
+      "age": 28,
+      "email": "sarah@example.com",
+      "password": "user123"
+    }
+  ],
+
+  "todos": [
+    {
+      "id": 1,
+      "userId": 2,
+      "title": "Buy groceries",
+      "description": "Milk, eggs, bread",
+      "status": "pending",
+      "createdAt": "2025-01-10T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "userId": 3,
+      "title": "Finish Angular training",
+      "description": "Complete TODO list page",
+      "status": "in-progress",
+      "createdAt": "2025-01-11T12:30:00Z"
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "title": "Clean the house",
+      "description": "Living room + kitchen",
+      "status": "done",
+      "createdAt": "2025-01-12T09:15:00Z"
+    }
+  ]
+}
