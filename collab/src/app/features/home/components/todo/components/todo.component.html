@@ -1,0 +1,24 @@
+<ul class="todo-list">
+  @for (todo of (allTodos$ | async); track todo.id) {
+  <li class="todo-card">
+    <div class="todo-card__main">
+      <h3 class="todo-card__title">{{ todo.title }}</h3>
+      <p class="todo-card__description">{{ todo.description }}</p>
+    </div>
+
+    <div class="todo-card__meta">
+      <span
+        class="todo-card__status"
+        [class.todo-card__status--done]="todo.status === 'done'"
+        [class.todo-card__status--pending]="todo.status === 'pending'"
+      >
+        {{ todo.status }}
+      </span>
+
+      <time class="todo-card__date">
+        {{ todo.createdAt | date : 'mediumDate' }}
+      </time>
+    </div>
+  </li>
+  }
+</ul>

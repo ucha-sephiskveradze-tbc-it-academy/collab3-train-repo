@@ -1,0 +1,74 @@
+.todo-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+  gap: 1.6rem;
+}
+
+.todo-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.6rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  &__title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+  }
+
+  &__description {
+    font-size: 1.4rem;
+    color: #4b5563;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  &__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__status {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+
+    &--done {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    &--pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+  }
+
+  &__date {
+    font-size: 1.2rem;
+    color: #6b7280;
+  }
+}
