@@ -3,20 +3,33 @@
 
 <textarea [(ngModel)]="forma().description" required minlength="5" placeholder="Enter description..."></textarea>
 <br>
+
 <select [(ngModel)]="forma().status" required>
     <option value="pending">Pending</option>
-    <option value="progress">In Progress</option>
+    <option value="in-progress">In Progress</option>
     <option value="completed">Completed</option>
 </select>
+<br>
 
 <button (click)="addTodo()">Add Todo</button>
 
 <div class="wrapper">
     @for (item of todos(); track $index) {
     <div>
-        <p> {{item.title}}</p>
-        <p> {{item.description}}</p>
-        <p> {{item.status}}</p>
+        <p>{{ item.title }}</p>
+        <p>{{ item.description }}</p>
+        <p>{{ item.status }}</p>
     </div>
     }
 </div>
+
+<br><br><br>
+
+<input type="text" placeholder="Enter Title to filter.." (input)="updateQuery({ search: $any($event.target).value })" />
+
+<select (change)="updateQuery({ status: $any($event.target).value })">
+    <option value="">All Statuses</option>
+    <option value="pending">Pending</option>
+    <option value="progress">In Progress</option>
+    <option value="completed">Completed</option>
+</select>
