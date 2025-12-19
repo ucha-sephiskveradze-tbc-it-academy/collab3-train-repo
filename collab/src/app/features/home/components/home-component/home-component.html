@@ -1,0 +1,24 @@
+<header class="header">
+  <ul class="header__nav">
+    <li class="header__item">
+      <a routerLink="/home" routerLinkActive="active">Home</a>
+    </li>
+
+    <li class="header__item">
+      <a routerLink="/todos" routerLinkActive="active">My Todos</a>
+    </li>
+
+    <li class="header__item">
+      <a routerLink="/auth" routerLinkActive="active">Register / Login</a>
+    </li>
+  </ul>
+</header>
+
+<section class="section-todo">
+  <header class="section-todo__header">
+    <h3 class="section-todo__header__heading">All Todos:</h3>
+  </header>
+  <div class="section-todo__container-box">
+    <app-todo-container></app-todo-container>
+  </div>
+</section>
