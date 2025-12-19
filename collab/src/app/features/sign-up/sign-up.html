@@ -1,0 +1,68 @@
+<div class="container">
+  <form class="form" (submit)="onSubmit($event)">
+    <label for="name">Name</label>
+    <input type="text" id="name" [field]="registerForm.name" placeholder="Enter your name..." />
+    @if (registerForm.name().touched() && registerForm.name().invalid()) {
+    <ul>
+      @for (error of registerForm.name().errors(); track error) {
+      <li>{{ error.message }}</li>
+      }
+    </ul>
+    }
+
+    <label for="surname">Surname</label>
+    <input
+      type="text"
+      id="surname"
+      [field]="registerForm.surname"
+      placeholder="Enter your surname..."
+    />
+    @if (registerForm.surname().touched() && registerForm.surname().invalid()) {
+    <ul>
+      @for (error of registerForm.surname().errors(); track error) {
+      <li>{{ error.message }}</li>
+      }
+    </ul>
+    }
+
+    <label for="age">Age</label>
+    <input type="number" id="age" [field]="registerForm.age" placeholder="Enter your age..." />
+    @if (registerForm.age().touched() && registerForm.age().invalid()) {
+    <ul>
+      @for (error of registerForm.age().errors(); track error) {
+      <li>{{ error.message }}</li>
+      }
+    </ul>
+
+    }
+
+    <label for="email">Email</label>
+    <input type="email" id="email" [field]="registerForm.email" placeholder="Enter your email..." />
+    @if (registerForm.email().touched() && registerForm.email().invalid()) {
+    <ul>
+      @for (error of registerForm.email().errors(); track error) {
+      <li>{{ error.message }}</li>
+      }
+    </ul>
+
+    }
+
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      [field]="registerForm.password"
+      placeholder="Enter your password..."
+    />
+    @if (registerForm.password().touched() && registerForm.password().invalid()) {
+    <ul>
+      @for (error of registerForm.password().errors(); track error) {
+      <li>{{ error.message }}</li>
+      }
+    </ul>
+
+    }
+
+    <button type="submit" [disabled]="!registerForm().valid()">Register</button>
+  </form>
+</div>
