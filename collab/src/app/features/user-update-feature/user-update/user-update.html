@@ -1,0 +1,32 @@
+@if(loading) {
+    <div>Loading user...</div>
+}
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" *ngIf="!loading">
+  <label>
+    Name:
+    <input formControlName="name" type="text" placeholder="Enter your name">
+  </label>
+  <br>
+  <label>
+    Surname:
+    <input formControlName="surname" type="text" placeholder="Enter your surname">
+  </label>
+  <br>
+  <label>
+    Age:
+    <input type="number" formControlName="age" type="number" placeholder="Enter your age">
+  </label>
+  <br>
+  <label>
+    Email:
+    <input type="email" formControlName="email" type="email" placeholder="Enter your email">
+  </label>
+  <br>
+  <label>
+    Password:
+    <input type="password" formControlName="password" type="password">
+  </label>
+  <br>
+  <button type="submit" [disabled]="userForm.invalid">Update Profile</button>
+</form>
