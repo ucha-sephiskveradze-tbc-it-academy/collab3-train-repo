@@ -1,7 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { ILoginData } from '../../core/models/login.model';
 import { email, Field, form, required } from '@angular/forms/signals';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginService } from './services/login';
 
@@ -29,6 +28,7 @@ export class Login {
     required(schemaPath.password, { message: 'Password is required' });
   });
 
+  
   onSubmit(event: Event) {
     event.preventDefault();
 
@@ -47,7 +47,9 @@ export class Login {
             this.loginSuccess = true;
             this.loginError = false;
             localStorage.setItem('currentUser', JSON.stringify(user));
-            this.router.navigate(['my-todos']);
+            localStorage.setItem('isLoggedIn', 'true');
+
+            this.router.navigate(['todos']);
           } else {
             alert('Invalid email or password!');
           }

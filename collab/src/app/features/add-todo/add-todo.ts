@@ -1,11 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { Todo } from '../../core/models/todo.model';
 import { TodoService } from './service/add-todo';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../../core/models/user.model';
-import { Observable } from 'rxjs';
+import { finalize, Observable, Subject, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'app-add-todo',
@@ -14,9 +14,10 @@ import { Observable } from 'rxjs';
   templateUrl: './add-todo.html',
   styleUrl: './add-todo.scss',
 })
-export class AddTodo {
-  todos = signal<Todo[]>([]);
-  userTodos$!: Observable<Todo[]>;
+export class AddTodo implements OnInit, OnDestroy {
+  public todos = signal<Todo[]>([]);
+  public userTodos$!: Observable<Todo[]>;
+  public destroy$: Subject<void> = new Subject<void>();
 
   forma = signal({
     title: '',
@@ -61,10 +62,17 @@ export class AddTodo {
       status: this.forma().status,
       createdAt: new Date().toISOString(),
     };
-    this.todoService.addTodo(todo).subscribe((newTodo) => {
-      this.todos.update((list) => [...list, newTodo]);
-      this.forma.set({ title: '', description: '', status: 'pending' });
-    });
+    this.todoService
+      .addTodo(todo)
+      .pipe(
+        tap((newTodo) => {
+          this.todos.update((list) => [...list, newTodo]);
+          this.forma.set({ title: '', description: '', status: 'pending' });
+        }),
+        takeUntil(this.destroy$),
+        finalize(() => (this.userTodos$ = this.todoService.getTodosByUser(this.id)))
+      )
+      .subscribe();
   }
 
   private applyFilters(options: { search: string; status: string }) {
@@ -87,5 +95,10 @@ export class AddTodo {
       queryParams: params,
       queryParamsHandling: 'merge',
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

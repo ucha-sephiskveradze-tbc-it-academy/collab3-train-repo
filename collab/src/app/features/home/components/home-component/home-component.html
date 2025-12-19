@@ -9,8 +9,12 @@
     </li>
 
     <li class="header__item">
+      @if(!isLoggedIn){
       <a routerLink="/login" routerLinkActive="active">Login</a>
       <a routerLink="/register" routerLinkActive="active">Registration</a>
+      }@else {
+        <a (click)="onLogout()">Log out</a>
+      }
     </li>
   </ul>
 </header>

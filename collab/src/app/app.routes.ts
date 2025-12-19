@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/components/home-component/home-component';
 import { AddTodo } from './features/add-todo/add-todo';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
   {
@@ -18,5 +19,10 @@ export const routes: Routes = [
   {
     path: 'todos',
     loadComponent: () => import('./features/add-todo/add-todo').then((m) => m.AddTodo),
+    canActivate: [authGuard],
+  },
+  {
+    path: '**',
+    loadComponent: () => import('./features/login/login').then((s) => s.Login),
   },
 ];
