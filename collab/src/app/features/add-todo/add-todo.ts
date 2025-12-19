@@ -1,24 +1,31 @@
 import { Component, signal } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import { Todo } from '../../core/models/todo.model';
 import { TodoService } from './service/add-todo';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IUser } from '../../core/models/user.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-todo',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, AsyncPipe],
   templateUrl: './add-todo.html',
   styleUrl: './add-todo.scss',
 })
 export class AddTodo {
   todos = signal<Todo[]>([]);
+  userTodos$!: Observable<Todo[]>;
 
   forma = signal({
     title: '',
     description: '',
     status: 'pending' as 'pending' | 'in-progress' | 'completed',
   });
+
+  user!: IUser;
+  id!: number;
 
   constructor(
     private todoService: TodoService,
@@ -37,11 +44,18 @@ export class AddTodo {
 
       this.applyFilters({ search, status });
     });
+
+    this.user = JSON.parse(localStorage.getItem('currentUser') || ' ');
+    this.id = +this.user.id;
+
+    console.log(this.id);
+
+    this.userTodos$ = this.todoService.getTodosByUser(this.id);
   }
 
   addTodo() {
     const todo = {
-      userId: 1,
+      userId: this.id,
       title: this.forma().title,
       description: this.forma().description,
       status: this.forma().status,

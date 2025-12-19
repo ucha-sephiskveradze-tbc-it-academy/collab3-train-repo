@@ -14,7 +14,7 @@
 <button (click)="addTodo()">Add Todo</button>
 
 <div class="wrapper">
-    @for (item of todos(); track $index) {
+    @for (item of userTodos$ | async; track $index) {
     <div>
         <p>{{ item.title }}</p>
         <p>{{ item.description }}</p>
