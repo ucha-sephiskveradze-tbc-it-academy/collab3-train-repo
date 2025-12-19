@@ -1,0 +1,22 @@
+<input type="text" [(ngModel)]="forma().title" required minlength="3" placeholder="Enter Title..." />
+<br>
+
+<textarea [(ngModel)]="forma().description" required minlength="5" placeholder="Enter description..."></textarea>
+<br>
+<select [(ngModel)]="forma().status" required>
+    <option value="pending">Pending</option>
+    <option value="progress">In Progress</option>
+    <option value="completed">Completed</option>
+</select>
+
+<button (click)="addTodo()">Add Todo</button>
+
+<div class="wrapper">
+    @for (item of todos(); track $index) {
+    <div>
+        <p> {{item.title}}</p>
+        <p> {{item.description}}</p>
+        <p> {{item.status}}</p>
+    </div>
+    }
+</div>
