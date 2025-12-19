@@ -4,7 +4,7 @@ import { HomeContainer } from './features/home/container/home.container';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HomeContainer],
+  imports: [RouterOutlet],
   standalone: true,
   templateUrl: './app.html',
   styleUrl: './app.scss',

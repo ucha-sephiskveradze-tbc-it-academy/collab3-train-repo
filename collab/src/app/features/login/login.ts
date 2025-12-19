@@ -19,15 +19,15 @@ export class Login {
 
   public loginModel = signal<ILoginData>({
     email: '',
-    password: ''
-  })
+    password: '',
+  });
 
   public loginForm = form(this.loginModel, (schemaPath) => {
     required(schemaPath.email, { message: 'Email is required' });
     email(schemaPath.email, { message: 'Enter a valid email address' });
 
     required(schemaPath.password, { message: 'Password is required' });
-  })
+  });
 
   onSubmit(event: Event) {
     event.preventDefault();
@@ -38,7 +38,7 @@ export class Login {
       this.loginService.getUsers().subscribe({
         next: (users) => {
           const user = users.find(
-            u => u.email === credentials.email && u.password === credentials.password
+            (u) => u.email === credentials.email && u.password === credentials.password
           );
 
           if (user) {
@@ -47,7 +47,7 @@ export class Login {
             this.loginSuccess = true;
             this.loginError = false;
             localStorage.setItem('currentUser', JSON.stringify(user));
-            this.router.navigate(['/']);
+            this.router.navigate(['my-todos']);
           } else {
             alert('Invalid email or password!');
           }
@@ -58,7 +58,7 @@ export class Login {
           localStorage.removeItem('isLoggedIn');
           console.error('Error during login:', error);
           alert('An error occurred during login');
-        }
+        },
       });
     }
   }
